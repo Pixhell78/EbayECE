@@ -1,0 +1,87 @@
+<head>
+  <title>Ece Amazone</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <style>
+    
+    
+    /* Set black background color, white text and some padding */
+    footer 
+    {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    .header
+    {        
+     background-image: url('login.jpg');        
+     background-size: cover;        
+     background-position: center; 
+     position: relative;
+    }
+
+    label
+    {
+      color: white;
+    }
+
+  </style>
+</head>
+
+<script type="text/javascript">      
+    $(document).ready(function(){           
+      $('.header').height($(window).height());      
+    }); 
+</script> 
+
+<body>
+
+<nav class="navbar navbar-expand-md">
+    <div class="collapse navbar-collapse" id="main-navigation">      
+      <ul class="navbar-nav">             
+        <h1  style="text-align: center">eBay ECE</h1>     
+      </ul>       
+    </div> 
+
+  </nav>
+
+<!--formulaire se connecter -->
+<header class="page-header header container-fluid">
+    <div class = "overlay"></div>
+<form action = "connect.php" method="post" style="width:50%; height: 100%; display: flex;flex-direction:  column; justify-content: center; align-content: center; ">
+  <div class="form-group">
+       <label for="email" class="col-md-3 control-label">Email</label>
+          <div class="col-md-9">
+               <input type="text" class="form-control" id="email" name="email" placeholder="Adresse email" required>
+          </div>
+  </div>
+                                    
+     <div class="form-group">
+          <label for="register_password" class="col-md-3 control-label">Mot de passe</label>
+            <div class="col-md-9">
+             <input type="password" id="register_password" data-minlength="8" class="form-control" name="password" placeholder="mot de passe" required>
+                </div>
+     </div>
+
+
+    <div class="form-group" >
+         <!-- Boutton -->                                        
+         <div class="col-md-offset-3 col-md-9" style=" margin-top:20px;">
+            <input id="btn-signin" type="submit" class="btn btn-info col-md-12" value ="Se connecter" ><i class="icon-hand-right"></i>
+                            
+         </div>
+    </div>
+
+</form>
+</header>
+
+<!-- fin formulaire se connecter -->
+
+</body>
+
+
