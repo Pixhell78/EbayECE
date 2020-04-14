@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS `acheteur` (
   `PRENOM` varchar(255) NOT NULL,
   `MAIL` varchar(255) NOT NULL,
   `PSEUDO` text NOT NULL,
-  `ADRESSE` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `MAIL` (`MAIL`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -75,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `objet` (
   `CATEGORIE` int(11) UNSIGNED NOT NULL,
   `DESCRIPTION` text NOT NULL,
   `PRIX` float UNSIGNED NOT NULL,
-  `PHOTO` text NOT NULL,
+  `image` text NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `vendeur_id` (`VENDEUR`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
@@ -109,13 +108,32 @@ INSERT INTO `vendeur` (`ID`, `NOM`, `PRENOM`, `MAIL`, `PSEUDO`, `ADRESSE`, `ADMI
 (1, 'vdb', 'hugo', 'hugo@ece.fr', 'aaa', 'Adresse1', 1);
 
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `adresse`
+--
+
+DROP TABLE IF EXISTS `adresse`;
+CREATE TABLE IF NOT EXISTS `adresse` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACHETEUR`int(11) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL,
+  `codepostal` text NOT NULL,
+  `pays` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ACHETEUR_ID` (`acheteur`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
 
 --
 -- Contraintes pour la table `item`
 --
 ALTER TABLE `objet`
   ADD CONSTRAINT `vendeur_id` FOREIGN KEY (`VENDEUR`) REFERENCES `vendeur` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+ALTER TABLE `adresse`
+  ADD CONSTRAINT `ACHETEUR_ID ` FOREIGN KEY (`ACHETEUR`) REFERENCES `acheteur` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
