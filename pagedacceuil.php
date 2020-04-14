@@ -73,11 +73,17 @@
   </style>
 </head>
 
+ 
 <body>
   <!-- Première barre de navigation contenant un lien vers les autres pages importantes -->
   <nav class="navbar navbar-expand-md" id="liens">
-    <div class="collapse navbar-collapse" id="main-navigation">      
-      <ul class="navbar-nav">             
+    <div class="collapse navbar-collapse" id="main-navigation">
+      <ul class="navbar-nav"> 
+       <?php
+            session_start();
+            echo '<li class="nav-item"><a style="color: #f1f1f1;float :left;  ">Connecté en tant que </br>'.$_SESSION['PSEUDO'].'</a></li>';
+
+        ?>            
         <li class="nav-item"><a class="nav-link" href="pagedacceuil.php">Accueil</a></li>             
         <li class="nav-item"><a class="nav-link" href="categories.php">Catégories</a></li>                      
         <li class="nav-item"><a class="nav-link" href="connexion.php">Vendre</a></li>

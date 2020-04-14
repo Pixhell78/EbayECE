@@ -1,5 +1,5 @@
 <head>
-  <title>Ece Amazone</title>
+  <title>EBAY ECE</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -56,16 +56,16 @@
     	<div class = "overlay"></div>
 		<form action = "connect.php" method="post" style="width:50%; height: 100%; display: flex;flex-direction:  column; justify-content: center; align-content: center; ">
   			<div class="form-group">
-       			<label for="email" class="col-md-3 control-label">Email</label>
+       			<label for="mail" class="col-md-3 control-label"  style="color:white;">Adresse email :</label>
           		<div class="col-md-9">
-               		<input type="text" class="form-control" id="email" name="email" placeholder="Adresse email" required>
+               		<input type="text" class="form-control" id="mail" name="mail" placeholder="Adresse email" required>
           		</div>
   			</div>
                                     
      		<div class="form-group">
-          		<label for="register_password" class="col-md-3 control-label">Mot de passe</label>
+          		<label for="pseudo" class="col-md-3 control-label" style="color:white;">Pseudonyme :</label>
             	<div class="col-md-9">
-             		<input type="password" id="register_password" data-minlength="8" class="form-control" name="password" placeholder="mot de passe" required>
+             		<input type="text" id="pseudo"  class="form-control" name="pseudo" placeholder="Pseudonyme" required>
                 </div>
      		</div>
 
@@ -86,12 +86,12 @@
     		<div class="row">       
       			<div class="col-lg-8 col-md-8 col-sm-12">       
         			<h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>       
-        			<p><right>Contactez-nous ! Nous sommes présent sur <a href="https://www.facebook.com/theo.chanashing"> Facebook</a> 
-          			ou <a href="https://www.instagram.com/theo_chanashing/?hl=fr">Instagram</a></right> !</p>
-          			<p><right>Contact us ! We are on <a href="https://www.facebook.com/theo.chanashing"> Facebook</a> 
-            		or <a href="https://www.instagram.com/theo_chanashing/?hl=fr">Instagram</a></right> !</p>
-            		<p> <right><a href="https://www.facebook.com/theo.chanashing"><img src="img/facebook.png"style="width:3%"></a>  
-              		or/and<a href="https://www.instagram.com/theo_chanashing/?hl=fr"><img src="img/instagram.png" style="width:3%"></a></right></p>
+        			<p><right>Contactez-nous ! Nous sommes présent sur <a href="https://www.facebook.com/"> Facebook</a> 
+          			ou <a href="https://www.instagram.com">Instagram</a></right> !</p>
+          			<p><right>Contact us ! We are on <a href="https://www.facebook.com/"> Facebook</a> 
+            		or <a href="https://www.instagram.com/">Instagram</a></right> !</p>
+            		<p> <right><a href="https://www.facebook.com/"><img src="img/facebook.png"style="width:3%"></a>  
+              		or/and<a href="https://www.instagram.com/"><img src="img/instagram.png" style="width:3%"></a></right></p>
             	</div>   
             	<div class="col-lg-4 col-md-4 col-sm-12">       
               		<h6 class="text-uppercase font-weight-bold">Contact</h6>       
