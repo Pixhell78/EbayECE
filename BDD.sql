@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 03 mai 2019 à 15:40
+-- Généré le :  mer. 15 avr. 2020 à 09:33
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -21,11 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `ebayece`
 --
-DROP DATABASE IF EXISTS `ebayece`;
-CREATE DATABASE IF NOT EXISTS `ebayece` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `ebayece`;
 
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `acheteur`
@@ -40,9 +37,34 @@ CREATE TABLE IF NOT EXISTS `acheteur` (
   `PSEUDO` text NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `MAIL` (`MAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
+--
+-- Déchargement des données de la table `acheteur`
+--
+
+INSERT INTO `acheteur` (`ID`, `NOM`, `PRENOM`, `MAIL`, `PSEUDO`) VALUES
+(1, 'vdb', 'hugo', 'hugo@ece.fr', 'hugovdb');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `adresse`
+--
+
+DROP TABLE IF EXISTS `adresse`;
+CREATE TABLE IF NOT EXISTS `adresse` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACHETEUR` int(11) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL,
+  `codepostal` text NOT NULL,
+  `pays` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ACHETEUR_ID` (`ACHETEUR`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,18 +74,59 @@ CREATE TABLE IF NOT EXISTS `acheteur` (
 
 DROP TABLE IF EXISTS `banque`;
 CREATE TABLE IF NOT EXISTS `banque` (
-  `CARTE` varchar(255) NOT NULL,
   `NUMERO` varchar(255) NOT NULL,
   `DATE` varchar(255) NOT NULL,
   `CODE` int(11) NOT NULL,
+  `SOLDE` float NOT NULL,
   PRIMARY KEY (`NUMERO`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `item`
+-- Structure de la table `enchere`
+--
+
+DROP TABLE IF EXISTS `enchere`;
+CREATE TABLE IF NOT EXISTS `enchere` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `OBJET` int(11) NOT NULL,
+  `ACHETEUR_ID` int(11) NOT NULL,
+  `OFFRE` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `objet_id` (`OBJET`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Déchargement des données de la table `enchere`
+--
+
+INSERT INTO `enchere` (`ID`, `OBJET`, `ACHETEUR_ID`, `OFFRE`) VALUES
+(1, 20, 1, 220);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `moffre`
+--
+
+DROP TABLE IF EXISTS `moffre`;
+CREATE TABLE IF NOT EXISTS `moffre` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACHETEUR_ID` int(11) NOT NULL,
+  `OBJET1` int(11) NOT NULL,
+  `OFFREA` float UNSIGNED NOT NULL,
+  `OFFREV` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `objet_id1` (`OBJET1`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objet`
 --
 
 DROP TABLE IF EXISTS `objet`;
@@ -71,15 +134,24 @@ CREATE TABLE IF NOT EXISTS `objet` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `NOM` varchar(255) NOT NULL,
   `VENDEUR` int(11) NOT NULL,
-  `CATEGORIE` int(11) UNSIGNED NOT NULL,
+  `TYPE` enum('enchere','immediat','meilleuroffre') DEFAULT NULL,
   `DESCRIPTION` text NOT NULL,
+  `IMAGE` text NOT NULL,
   `PRIX` float UNSIGNED NOT NULL,
-  `image` text NOT NULL,
+  `FIN` datetime,
   PRIMARY KEY (`ID`),
   KEY `vendeur_id` (`VENDEUR`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `objet`
+--
 
+INSERT INTO `objet` (`ID`, `NOM`, `VENDEUR`, `TYPE`, `DESCRIPTION`, `IMAGE`, `PRIX`, `FIN`) VALUES
+(1, 'Ballon dor', 1, 'enchere', 'copie ballon dor', 'ballon.png', 200, '2020-04-16 00:00:00'),
+(15, 'Guitare FENDER', 1, 'immediat', 'Guitare fender, ideale pour un niveau intermediaire', 'guitare.jpg', 350, '2020-04-30 00:00:00'),
+(16, 'Veste en jean bleue', 1, 'immediat', 'Veste en jean bleue jamais portee', 'veste_jean.jpg', 30, '2020-04-30 00:00:00'),
+(17, 'Collier', 1, 'immediat', 'Collier d\'alliage nacre/argent veritable', 'collier_nacre.jpg', 100, '2020-04-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -98,42 +170,44 @@ CREATE TABLE IF NOT EXISTS `vendeur` (
   `ADMIN` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `MAIL` (`MAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `vendeur`
 --
 
 INSERT INTO `vendeur` (`ID`, `NOM`, `PRENOM`, `MAIL`, `PSEUDO`, `ADRESSE`, `ADMIN`) VALUES
-(1, 'vdb', 'hugo', 'hugo@ece.fr', 'aaa', 'Adresse1', 1);
-
-
--- --------------------------------------------------------
+(1, 'vdb', 'hugo', 'hugo@ece.fr', 'Hugo', 'Adresse1', 1),
+(7, 'benard', 'antoire', 'atoine@ece.fr', 'Antoine', '36 rue du moulin rouge', 1);
 
 --
--- Structure de la table `adresse`
+-- Contraintes pour les tables déchargées
 --
 
-DROP TABLE IF EXISTS `adresse`;
-CREATE TABLE IF NOT EXISTS `adresse` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ACHETEUR`int(11) NOT NULL,
-  `adresse` varchar(255) NOT NULL,
-  `ville` varchar(255) NOT NULL,
-  `codepostal` text NOT NULL,
-  `pays` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ACHETEUR_ID` (`acheteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
+--
+-- Contraintes pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  ADD CONSTRAINT `ACHETEUR_ID ` FOREIGN KEY (`ACHETEUR`) REFERENCES `acheteur` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `item`
+-- Contraintes pour la table `enchere`
+--
+ALTER TABLE `enchere`
+  ADD CONSTRAINT `objet_id` FOREIGN KEY (`OBJET`) REFERENCES `objet` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `moffre`
+--
+ALTER TABLE `moffre`
+  ADD CONSTRAINT `objet_id1` FOREIGN KEY (`OBJET1`) REFERENCES `objet` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `objet`
 --
 ALTER TABLE `objet`
   ADD CONSTRAINT `vendeur_id` FOREIGN KEY (`VENDEUR`) REFERENCES `vendeur` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `adresse`
-  ADD CONSTRAINT `ACHETEUR_ID ` FOREIGN KEY (`ACHETEUR`) REFERENCES `acheteur` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

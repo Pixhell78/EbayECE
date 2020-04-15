@@ -240,43 +240,118 @@
 <div class="container features">
   <center><h3 style="width: 500px; border: 2px black solid; font-family: 'Roboto', sans-serif;"><center>Les dernières promo en achat direct !</center></h3></center>
   <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-      <a href="guitare.php"><img src="guitare.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-      <p>Guitare fender, idéale pour un niveau intermédiaire <br>
-        <span>Prix : 350€ </span><span style=" text-decoration: line-through;">Prix réel: 537€</span></p>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-12">
-        <a href="musee.php"><img src="veste_jean.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-        <p>Veste en jean bleue jamais portée <br>
-          <span>Prix : 30€ </span><span style=" text-decoration: line-through;">Prix réel: 50€</span></p> </p>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <a href="vip.php"><img src="collier_nacre.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-          <p>Collier d'alliage nacre/argent véritable <br>
-            <span>Prix : 100€ </span><span style="text-decoration: line-through;">Prix réel: 115€</span></p></p>
-          </div> 
+          <?php
+  define('DB_SERVER','localhost');
+  define('DB_USER', 'root');
+  define('DB_PASS','');
+  $database ="ebayece";
+  $db_handle = mysqli_connect(DB_SERVER,DB_USER,DB_PASS);
+  $db_found = mysqli_select_db($db_handle, $database);
+    
+  
+  if($db_found){
+  
+      $sql_count = mysqli_query($db_handle,"SELECT COUNT(*) AS nom FROM objet WHERE type='immediat'") or exit(mysql_error());
+      $donnees = mysqli_fetch_array($sql_count);
+      $num = $donnees['nom'];
+ 
+     
+      
+        $sql = "SELECT * FROM objet  WHERE type='immediat'" ;
+        $result = mysqli_query($db_handle,$sql);
+            for($i=1;$i<=$num;$i++) {
+
+      $data = mysqli_fetch_array($result);
+      $image = $data['IMAGE'];
+      $idvendeur = $data['VENDEUR'];
+      $nom = $data['NOM'];
+      $prix = $data['PRIX'];
+      $description = $data['DESCRIPTION'];
+      $prixreel = $prix+($prix/8);
+      $sql1 = "SELECT * FROM VENDEUR WHERE ID='$idvendeur'" ;
+      $result1 = mysqli_query($db_handle,$sql1);
+      $data1 = mysqli_fetch_array($result1);
+      $vendeur = $data1['PSEUDO'];
+        
+  
+  
+    echo '     <div class="col-lg-4 col-md-4 col-sm-12">
+              <a href="guitare.php"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
+              <p>'.$description.'<br>
+              <span>Prix : '.$prix.'€ </span><span style=" text-decoration: line-through;">Prix réel: '.$prixreel.' €<br></span>
+              <span>Vendu par : '.$vendeur.' </span></p>
+              </div>';
+            }
+         }
+          else{
+            echo "Database not found";
+          }    
+    
+  mysqli_close($db_handle);
+  ?>
+      
         </div> 
       </div>
       <!-- Division avec les images de produit mis en vente aux enchères -->
       <div class="container features">
         <center><h3 style="width: 300px; border: 2px black solid; font-family: 'Roboto', sans-serif;"><center>Ventes aux enchères</center></h3></center> 
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <a href="guitare.php"><img src="montre.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-            <p>Montre en quartz <br>
-              <span>Prix de base : 1000€ </span></p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <a href="musee.php"><img src="vase.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-              <p>Vase en céramique <br>
-                <span>Prix de base : 10€</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                  <a href="vip.php"><img src="ballon_or.jpg" class="img-fluid" style="margin-top: 50px;"></a>
-                  <p>Réplique du ballon d'or <br>
-                    <span>Prix de base : 200€</p>
-                    </div> 
-                  </div> 
+                    <?php
+
+  $database ="ebayece";
+  $db_handle = mysqli_connect(DB_SERVER,DB_USER,DB_PASS);
+  $db_found = mysqli_select_db($db_handle, $database);
+    
+  
+  if($db_found){
+  
+      $sql_count = mysqli_query($db_handle,"SELECT COUNT(*) AS nom FROM objet WHERE type='enchere'") or exit(mysql_error());
+      $donnees = mysqli_fetch_array($sql_count);
+      $num = $donnees['nom'];
+ 
+     
+      
+        $sql = "SELECT * FROM objet  WHERE type='enchere'" ;
+        $result = mysqli_query($db_handle,$sql);
+            for($i=1;$i<=$num;$i++) {
+
+      $data = mysqli_fetch_array($result);
+      $idobjet = $data['ID'];
+      $image = $data['IMAGE'];
+      $idvendeur = $data['VENDEUR'];
+      $nom = $data['NOM'];
+      $prix = $data['PRIX'];
+      $description = $data['DESCRIPTION'];
+      $prixreel = $prix+($prix/8);
+      $sql1 = "SELECT * FROM VENDEUR WHERE ID='$idvendeur'" ;
+      $result1 = mysqli_query($db_handle,$sql1);
+      $data1 = mysqli_fetch_array($result1);
+      $vendeur = $data1['PSEUDO'];
+
+      $sql2 = "SELECT * FROM enchere WHERE OBJET='$idobjet' HAVING OFFRE = MAX(OFFRE)";
+      $result2 = mysqli_query($db_handle,$sql2);
+      $data2 = mysqli_fetch_array($result2);
+      $offre = $data2['OFFRE'];
+        
+        
+  
+  
+    echo '     <div class="col-lg-4 col-md-4 col-sm-12">
+              <a href="guitare.php"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
+              <p>'.$description.'<br>
+              <span>Prix de départ: '.$prix.'€ </span><span>Dernier enchere: '.$offre.' €<br></span>
+              <span>Vendu par : '.$vendeur.' </span></p>
+              </div>';
+            }
+         }
+          else{
+            echo "Database not found";
+          }    
+    
+  mysqli_close($db_handle);
+  ?>
+
+                   </div> 
                 </div> 
                 <!-- Footer -->
                 <footer class="page-footer">
