@@ -1,24 +1,8 @@
-#liens
-{   
-	background-color : black; 
-}
-
-#logo
-{
-	background-color: white;
-	text-align: center;
-}
-
-#logo .navbar-brand
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
+/* Barre de lien */
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 .nav-link, .navbar-brand 
 {  
-	color: white;   
+	color: black;   
 	cursor: pointer; 
 } 
 
@@ -29,7 +13,8 @@
 
 .nav-link:hover
 {   
-	color: yellow;
+	color: white;
+	background-color: black;
 } 
 
 .navbar-collapse
@@ -39,8 +24,9 @@
 
 .container img
 {
-	width: 150px;
-	height: 150px;
+	width: 100px;
+	height: 200px;
+	border: 2px black solid;
 }
 
 .features 
@@ -55,8 +41,7 @@
 	color: #333;   
 	font-size: 1.3rem;   
 	font-weight: 700;   
-	margin-bottom: 20px;   
-	text-transform: uppercase; 
+	margin-bottom: 20px;    
 } 
  
 .features img 
@@ -73,31 +58,54 @@
  
 .features .btn 
 {   background-color: #589b37;   
-	border: 1px solid #589b37;   
+	border: 2px solid #589b37;   
 	color: #fff;   
 	margin-top: 20px; 
 } 
  
 .features .btn:hover 
 {   background-color: #333;  
- border: 1px solid #333; 
+ border: 2px solid #333; 
 }
 
 .page-footer 
 {   
-	background-color: #222;   
-	color: #ccc;   
-	padding: 60px 0 30px; 
-} 
+	background-color: black;   
+	color: white;   
+	padding: 60px 0 30px;
+	max-height: 150px;
+}
 
 .page-footer img
 {
-	width: 25px;
-	height: 25px;
+	width: 70px;
+	height: 70px;
 }
-.footer-copyright 
-{   
-	color: #666;   
-	padding: 40px 0; 
+
+#footer
+{
+	display: flex;
+	flex-direction: row;
 }
- 
+
+#contact
+{
+	width: 150px;
+}
+
+#follow
+{
+	margin-top: -25px;
+}
+
+#info
+{
+	width: 350px;
+	margin-top: -10px;
+}
+
+#tel
+{
+	margin-right: 100px;
+	margin-top: -10px;
+}
