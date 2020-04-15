@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page d'accueil</title>
+  <title>Vendre</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -9,18 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-  <style type="text/css">
-    #first
-    {
-      margin-top: 180px;
-    }
-
-    #slogan
-    {
-      margin-top: -80px;
-    }
-  </style>
 </head>
 
 <body>
@@ -29,15 +17,21 @@
     <img src="logo.svg" id="logo" style="display: block; margin-left: auto; margin-right: auto; margin-top: -15px; height: 130px; width: 130px">
     <input type="checkbox" class="burger">
     <nav>
-      <div id = "trait"></div>                      
-      <a class="nav-link" href="connexion.php" style="border-bottom: 2px black solid">Connexion</a></li>
+      <div id = "trait"></div>
+      <a class="nav-link" href="pagedacceuil.php">Accueil</a></li>             
+      <a class="nav-link" href="categories.php">Catégories</a></li>                      
+      <a class="nav-link" href="vendre.php">Vendre</a></li>
+      <a class="nav-link" href="admin.php">Admin</a></li>
+      <a class="nav-link" href="profil.php">Ma Page</a></li>
+      <a class="nav-link" href="connexion.php">Connexion</a></li>
+      <a class="nav-link" href="panier.php" id ="pan">Mon panier<img src="panier_noir.svg" style="width: 40px; height: 40px; margin-right: -5px"></a>
     </nav>
   </div>
+
   <!-- Division contenant le slogan, superposé au carrousel et qui rest en haut de l'écran lorsque l'on scroll -->
   <div id="slogan">
     <h3 style="margin-top: 10px"><center>Négociez votre bonheur</center></h3>
   </div>
-
 
   <!-- Formulaire d'inscription -->
   <section class="container-fluid"> 
@@ -45,7 +39,7 @@
         <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
              <div class="informationgeneral">
                 <div class="entete">
-                    <div class="titre-information"><center>FORMULAIRE D'INSCRIPTION</center></div>
+                    <div class="titre-information"><center>FORMULAIRE DE VENTE</center></div>
                 </div>  
                 <div class="contenue" >
                   <form id="signupform" class="form-horizontal" role="form" action="inscription.php" method="post">
@@ -55,9 +49,16 @@
                     </div>           
                 <!-- RENSEIGNEMENT -->
                     <div class="form-group">
-                      <label for="prenom" class="col-md-3 control-label">Prenom</label>
+                      <label for="vente" class="col-md-3 control-label">Type de vente</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
+                        <input type="text" class="form-control" id="type" name="vente" placeholder="vente" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="produit" class="col-md-3 control-label">Type de produit</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="type" name="produir" placeholder="produit" required>
                       </div>
                     </div>
                                 
@@ -69,53 +70,21 @@
                     </div>
                                 
                     <div class="form-group">
-                        <label for="adresse" class="col-md-3 control-label">Adresse</label>
+                        <label for="adresse" class="col-md-3 control-label">Description</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse" required>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="description" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="pays" class="col-md-3 control-label">Pays</label>
-                      <div class="col-md-9">
-                        <input type="text" class="form-control" id="pays" name="pays" placeholder="pays">
-                      </div>
+                      <label for="iamge" style="margin-left: 15px">Image<br></label><br><input type="file" id="image" name="Fichier" size="35" style="margin-left: 15px">
                     </div>
                                      
                     <div class="form-group">
-                      <label for="ville" class="col-md-3 control-label">Ville</label>
+                      <label for="ville" class="col-md-3 control-label">Prix de vente</label>
                       <div class="col-md-9">
-                          <input type="text" class="form-control" id="ville" name="ville" placeholder="ville" required>
+                          <input type="text" class="form-control" id="prix" name="prix" placeholder="0,00€" required>
                       </div>
-                    </div>
-                                
-                    <div class="form-group">
-                      <label for="code_postal" class="col-md-3 control-label">Code Postal</label>
-                      <div class="col-md-9">
-                        <input type="text" class="form-control" maxlength="5" id="code_postal" name="cp" placeholder="Code postal" required>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="phone" class="col-md-3 control-label">Téléphone</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="phone" name="tel" placeholder="Téléphone" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="email" class="col-md-3 control-label">Email</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="email" name="mail" placeholder="adresse email" required>
-                        </div>
-                    </div>
-                                    
-                    <div class="form-group">
-                      <label for="register_password" class="col-md-3 control-label">Mot de passe</label>
-                      <div class="col-md-9">
-                        <input type="password" id="register_password" data-minlength="8" class="form-control" name="password" placeholder="mot de passe" required>
-                        <sub>Minimum de 8 caracteres</sub>
-                      </div>                
                     </div>
 
                     <div class="form-group" >
@@ -131,7 +100,7 @@
                 </div>
               </section>
 
-  <!-- Footer -->
+              <!-- Footer -->
   <footer class="page-footer">
     <div id = "footer">
       <div id = "contact">   
@@ -149,6 +118,3 @@
     </div>
 
   </footer>
-
-</body>
-</html>

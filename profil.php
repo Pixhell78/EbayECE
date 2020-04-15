@@ -8,30 +8,32 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Première barre de navigation contenant un lien vers les autres pages importantes -->
-  <nav class="navbar navbar-expand-md" id="liens">
-    <div class="collapse navbar-collapse" id="main-navigation">      
-      <ul class="navbar-nav">             
-        <li class="nav-item"><a class="nav-link" href="pagedacceuil.php">Accueil</a></li>             
-        <li class="nav-item"><a class="nav-link" href="categories.php">Catégories</a></li>                      
-        <li class="nav-item"><a class="nav-link" href="connexion.php">Vendre</a></li>
-        <li class="nav-item"><a class="nav-link" href="connexion.php">Admin</a></li>
-        <li class="nav-item"><a class="nav-link" href="profil.php">Ma Page</a></li>
-        <li class="nav-item"><a class="nav-link" href="panier.php"><img src="panier.jpg" style="width: 30px; height: 20px; margin-right: -5px">Mon panier</a></li>        
-      </ul>         
-    </div> 
-  </nav>
-  <!-- Deuxième barre de navigation contenant le logo -->
-  <nav class="navbar navbar-expand-md" id="logo">
-    <a class="navbar-brand" href="#"><img src="logo.jpg" style="width : 100px; height : 75px;"></a>
-  </nav>
+  <!-- Barre de navigation contenant le logo et le menu burger -->
+  <div class="menu">
+    <img src="logo.svg" id="logo" style="display: block; margin-left: auto; margin-right: auto; margin-top: -15px; height: 130px; width: 130px">
+    <input type="checkbox" class="burger">
+    <nav>
+      <div id = "trait"></div>
+      <a class="nav-link" href="pagedacceuil.php">Accueil</a></li>             
+      <a class="nav-link" href="categories.php">Catégories</a></li>                      
+      <a class="nav-link" href="connexion.php">Vendre</a></li>
+      <a class="nav-link" href="connexion.php">Admin</a></li>
+      <a class="nav-link" href="profil.php">Ma Page</a></li>
+      <a class="nav-link" href="panier.php" id ="pan">Mon panier<img src="panier_noir.svg" style="width: 40px; height: 40px; margin-right: -5px"></a>
+    </nav>
+  </div>
+  <!-- Division contenant le slogan, superposé au carrousel et qui rest en haut de l'écran lorsque l'on scroll -->
+  <div id="slogan">
+    <h3 style="margin-top: 10px"><center>Négociez votre bonheur</center></h3>
+  </div>
 
   <!-- DIvision contenant les derniers achats -->
-  <div class="container features">
-    <h3><center>Derniers achats</center></h3> 
+  <div class="container features" id="first">
+    <center><h3><center>Derniers achats</center></h3></center>
   </div> 
 
   <!-- Footer -->
