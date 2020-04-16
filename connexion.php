@@ -11,13 +11,13 @@
 
 <body>
 
-	<!-- Barre de navigation contenant le logo et le menu burger -->
+  <!-- Barre de navigation contenant le logo et le menu burger -->
   <div class="menu">
     <img src="logo.svg" id="logo" style="display: block; margin-left: auto; margin-right: auto; margin-top: -15px; height: 130px; width: 130px">
     <input type="checkbox" class="burger">
     <nav>
       <div id = "trait"></div>
-      <a class="nav-link" id ="pan" href="Connexion.php">Connexion</a></li>             
+      <a class="nav-link" id ="pan" href="inscription.php">Inscription</a></li>             
 
     </nav>
   </div>
@@ -27,7 +27,7 @@
   </div>
 
 
-	<!-- Formulaire de connexion -->
+  <!-- Formulaire de connexion -->
   <header class="page-header header container-fluid">
       <div class = "overlay"></div>
     <form action = "connect.php" method="post" style="width:50%; height: 100%; display: flex;flex-direction:  column; justify-content: center; align-content: center; ">
@@ -56,7 +56,7 @@
     </form>
   </header>
 
-	<!-- Footer -->
+  <!-- Footer -->
   <footer class="page-footer">
     <div id = "footer">
       <div id = "contact">   
