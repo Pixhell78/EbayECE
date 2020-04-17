@@ -78,7 +78,7 @@
   <!-- Barre de navigation contenant le logo et le menu burger -->
   <div class="menu">
        <?php
-            echo '<h5 style="position:absolute; margin-left: 10px; margin-right: auto; margin-top: 20px; height: 130px; width: auto">Connecté en tant que </br>'.$_SESSION['PSEUDO'].'</h5>';
+            echo '<h5 style="position:absolute; margin-left: 10px; margin-right: auto; margin-top: 20px; height: 130px; width: auto">Connecté en tant que </br>'.$_SESSION['PSEUDO'].' ( '.$_SESSION['COMPTE'].' )</h5>';
     ?>
     <img src="logo.svg" id="logo" style="display: block; margin-left: auto; margin-right: auto; margin-top: -15px; height: 130px; width: 130px">
     <input type="checkbox" class="burger">
@@ -221,13 +221,13 @@
       $nom = $data['NOM'];
       $prix = $data['PRIX'];
       $description = $data['DESCRIPTION'];
-      $prixreel = $prix+($prix/8);
+      $datefin = $data['FIN'];
       $sql1 = "SELECT * FROM VENDEUR WHERE ID='$idvendeur'" ;
       $result1 = mysqli_query($db_handle,$sql1);
       $data1 = mysqli_fetch_array($result1);
       $vendeur = $data1['PSEUDO'];
 
-      $sql2 = "SELECT * FROM enchere WHERE OBJET='$idobjet' HAVING OFFRE = MAX(OFFRE)";
+      $sql2 = "SELECT * from enchere WHERE OBJET='$idobjet' ORDER BY OFFRE DESC LIMIT 1";
       $result2 = mysqli_query($db_handle,$sql2);
       $data2 = mysqli_fetch_array($result2);
       $offre = $data2['OFFRE'];
@@ -238,9 +238,15 @@
     echo '     <div class="col-lg-4 col-md-4 col-sm-12">
               <a href="guitare.php"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
               <p>'.$description.'<br>
-              <span>Prix de départ: '.$prix.'€ </span><span>Derniere enchere: '.$offre.' €<br></span>
-              <span>Vendu par : '.$vendeur.' </span></p>
-              </div>';
+              <span>Prix de départ: '.$prix.'€<br> </span><span>Derniere enchere: '.$offre.' €<br></span>
+              <span>Vendu par : '.$vendeur.' </br></span>
+              <span>Fin de l`enchere : '.$datefin.' </span></p>
+              <form id="signupform" class="form-horizontal" role="form" action="enchere.php" method="get">
+                      <label for="surenchere" class="col-md-3 control-label">Surenchérir:</label>
+                          <input type="text" class="form-control" id="prix" name="prix" placeholder="0,00€" required>
+                          <button id="btn-signup" type="submit" name="idobjet" value="'.$idobjet.'" class="btn btn-info col-md-12"><i class="icon-hand-right"></i> &nbsp Surenchérir</button>
+                    </div>
+              </form>';
             }
          }
           else{
