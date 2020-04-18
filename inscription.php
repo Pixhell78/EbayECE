@@ -254,7 +254,7 @@ if (isset($_POST["typecompte"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
               <div class="form-group" id="code">
                 <label for="postal" class="col-md-3 control-label" id="txtCode"><h4>Code Postal</h4></label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" style="border: 2px black solid; width: 300px" id="codepostal" name="codepostal" placeholder="Exemple: 94260" required>
+                  <input type="text" class="form-control" style="border: 2px black solid; width: 300px" id="ostal" name="postal" placeholder="Exemple: 94260" required>
                 </div>
               </div>
 
@@ -275,9 +275,9 @@ if (isset($_POST["typecompte"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
               </div>
 
               <div class="form-group" id="password">
-                <label for="mdp" class="col-md-3 control-label" id="txtMdp"><h4>Pseudonyme</h4></label>
+                <label for="mdp" class="col-md-3 control-label" id="txtMdp"><h4>Mot de passe</h4></label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" style="border: 2px black solid; width: 300px" id="form-control" name="pseudo" required>
+                  <input type="password" class="form-control" style="border: 2px black solid; width: 300px" id="form-control" name="pseudo" required>
                 </div>
               </div>
             </div>

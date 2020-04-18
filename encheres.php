@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>ebay ECE</title>
+  <title>Produit</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -9,33 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-  <style type="text/css">
-    #info1, #info2
-    {
-
-      width: 300px;
-      height: 150px;
-    }
-
-    #informations
-    {
-      margin-left: 250px;
-    }
-
-    #info2
-    {
-      margin-left: 600px;
-      margin-bottom: 200px;
-      margin-top: -150px
-    }
-
-    p
-    {
-      border: 2px black solid;
-      border-radius: 5px;
-    }
-  </style>
 </head>
 
 <body>
@@ -63,30 +36,40 @@
 
   <!-- DIvision contenant les derniers achats -->
   <div class="container features" id="first">
-    <center><h3 style="width: 200px"><center>Ma page</center></h3></center>
+    <center><h3 style="width: 350px"><center>Articles aux enchères</center></h3></center>
   </div>
 
-  <div id="informations">
-    <div id="info1">
-      <h4>Nom</h4>
-      <p>Info à mettre</p>
-      <h4>Prénom</h4>
-      <p>Info à mettre</p>
-      <h4>E-Mail</h4>
-      <p>Info à mettre</p>
+  <!-- Liste à adapter -->
+<div class="container features" style="margin-top: -50px;"> 
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php"><img src="ferraille.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
     </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php" ><img src="musee.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php"><img src="vip.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
+    </div> 
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php"><img src="login.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php" ><img src="achats.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <a href="produit.php"><img src="meilleures_ventes.jpg" class="img-fluid"></a>
+      <p style="margin-top: 15px; margin-left: 80px">Nom du produit <br> Prix :</p>
+    </div>
+   </div>
+</div> 
 
-    <div id="info2">
-      <h4>Adresse</h4>
-      <p>Info à mettre</p>
-      <h4>Ville</h4>
-      <p>Info à mettre</p>
-      <h4>Pays</h4>
-      <p>Info à mettre</p>
-    </div>   
-  </div>
-
-  <!-- Footer -->
+<!-- Footer -->
 <footer class="page-footer">
   <div id = "footer">
     <div id = "contact">   
@@ -104,6 +87,3 @@
   </div>
 
 </footer>
-
-
-</body>
