@@ -21,7 +21,7 @@
   	#nom
   	{
   		font-family: 'Roboto-bold', sans-serif;
-  		margin-top: 200px;
+  		margin-top: 100px;
   		margin-left: -44px;
   	}
 
@@ -114,7 +114,10 @@
       $result1 = mysqli_query($db_handle,$sql1);
       $data1 = mysqli_fetch_array($result1);
       $vendeur = $data1['PSEUDO'];
-        
+      $sql2 = "SELECT * from enchere WHERE OBJET='$idobjet' ORDER BY OFFRE DESC LIMIT 1";
+      $result2 = mysqli_query($db_handle,$sql2);
+      $data2 = mysqli_fetch_array($result2);
+      $offre = $data2['OFFRE'];
   
   
     echo '     <div class="col-lg-4 col-md-4 col-sm-12">
@@ -126,16 +129,19 @@
            
                  <h4>'.$description.'</h4>
            
-                 <h4>Prix: '.$prix.' €</h4>
             
                  <h4>Vendeur: '.$vendeur.'</h4>';
     if($type=='immediat'){
-            echo'  <form id="signupform" class="form-horizontal" role="form" action="ajoutpanier.php" method="get">
+            echo'  
+                             <h4>Prix: '.$prix.' €</h4>
+                        <form id="signupform" class="form-horizontal" role="form" action="ajoutpanier.php" method="get">
                           <button id="btn-signup" class="btn btn-lg btn-dark btn-block  text-uppercase" type="submit" name="idobjet" value="'.$idobjet.'" ></i> &nbsp Ajouter au panier</button>
               </form>
              </div>';}
       else if($type=='enchere'){
             echo'
+                          <span>Prix de départ: '.$prix.'€<br> </span><span>Derniere enchere: '.$offre.' €</span>
+
             </div> 
                        <div class="col-lg-3 col-md-3 col-sm-12" id="nom2">
 
