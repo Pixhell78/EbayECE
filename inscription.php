@@ -55,11 +55,17 @@ if (isset($_POST["typecompte"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
       $codepostal= $_POST['codepostal'];
       $pays      = $_POST['pays'];
 
-      $adresse.=" ".$ville." ".$codepostal." ".$pays;
       if($db_found){
-                    $sql ="INSERT INTO vendeur (`id`, `nom`,`prenom`, `mail`, `pseudo`,`adresse`,`admin`) VALUES (NULL,'".$nom."', '".$prenom."','$mail', '$pseudo','$adresse ',0);";
+                    $sql ="INSERT INTO vendeur (`id`, `nom`,`prenom`, `mail`, `pseudo`,`admin`) VALUES (NULL,'".$nom."', '".$prenom."','$mail', '$pseudo',0);";
                     $result = mysqli_query($db_handle, $sql);
 
+                        $dernierId                  = mysqli_insert_id($db_handle);
+                        
+                        $sql2                       ="INSERT INTO adresse(`id`,`acheteur`,`adresse`, `ville`, `codepostal`, `pays`) VALUES (NULL, '$dernierId', '$adresse','$ville','$codepostal','$pays');";
+                        $result2                    = mysqli_query($db_handle, $sql2);
+                                            echo '<script type="text/javascript">window.alert("Inscription réussi !");</script>';
+
+echo $sql2;
                     echo '<script type="text/javascript">window.alert("Inscription réussi !");</script>';
                     }
 

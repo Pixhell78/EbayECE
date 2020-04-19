@@ -162,6 +162,8 @@
 
       $data = mysqli_fetch_array($result);
       $image = $data['IMAGE'];
+      $idobjet = $data['ID'];
+
       $idvendeur = $data['VENDEUR'];
       $nom = $data['NOM'];
       $prix = $data['PRIX'];
@@ -175,11 +177,14 @@
   
   
     echo '     <div class="col-lg-4 col-md-4 col-sm-12">
-              <a href="guitare.php"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
+              <a href="produit.php?id='.$idobjet.'"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
               <p>'.$description.'<br>
               <span>Prix : '.$prix.'€ </span><span style=" text-decoration: line-through;">Prix réel: '.$prixreel.' €<br></span>
               <span>Vendu par : '.$vendeur.' </span></p>
-              </div>';
+              <form id="signupform" class="form-horizontal" role="form" action="ajoutpanier.php" method="get">
+                          <button id="btn-signup" style="margin:0 auto;"type="submit" name="idobjet" value="'.$idobjet.'" class="btn btn-dark col-md-10"><i class="icon-hand-right"></i> &nbsp Ajouter au panier</button>
+              </form>
+             </div>';
             }
          }
           else{
@@ -236,15 +241,15 @@
   
   
     echo '     <div class="col-lg-4 col-md-4 col-sm-12">
-              <a href="guitare.php"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
+              <a href="produit.php?id='.$idobjet.'"><img src="'.$image.'" class="img-fluid" style="margin-top: 50px;"></a>
               <p>'.$description.'<br>
               <span>Prix de départ: '.$prix.'€<br> </span><span>Derniere enchere: '.$offre.' €<br></span>
               <span>Vendu par : '.$vendeur.' </br></span>
               <span>Fin de l`enchere : '.$datefin.' </span></p>
               <form id="signupform" class="form-horizontal" role="form" action="enchere.php" method="get">
                       <label for="surenchere" class="col-md-3 control-label">Surenchérir:</label>
-                          <input type="text" class="form-control" id="prix" name="prix" placeholder="0,00€" required>
-                          <button id="btn-signup" type="submit" name="idobjet" value="'.$idobjet.'" class="btn btn-info col-md-12"><i class="icon-hand-right"></i> &nbsp Surenchérir</button>
+                          <input type="text" class="form-control col-md-10" id="prix" name="prix" placeholder="0,00€" required>
+                          <button id="btn-signup" type="submit" name="idobjet" value="'.$idobjet.'" class="btn btn-dark col-md-10"><i class="icon-hand-right"></i> &nbsp Surenchérir</button>
                     </div>
               </form>';
             }
