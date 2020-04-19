@@ -92,7 +92,12 @@
   $db_handle = mysqli_connect(DB_SERVER,DB_USER,DB_PASS);
   $db_found = mysqli_select_db($db_handle, $database);
     
-  
+  if ( empty(session_id()) ) session_start();
+if($_SESSION['COMPTE']!='Admin'){
+  echo '<script type="text/javascript">window.alert("Vous devez être administrateur.");</script>';
+  echo '<meta http-equiv="refresh" content="0; URL=pagedacceuil.php">';
+}
+
   if($db_found){
   
       $sql_count = mysqli_query($db_handle,"SELECT COUNT(*) AS nom FROM objet") or exit(mysql_error());
@@ -230,7 +235,7 @@
     <h4 style="height: 50px">Quelle vendeur voulez vous supprimer ?</h4>
 <form id="signupform" class="form-horizontal" role="form" action="supprimervendeur.php" method="get">
               <div class="form-group" id="objet">
-                  <input type="text" class="form-control" placeholder="ID du produit a supprimer" style="border: 2px black solid; width: 410px" id="form-control" name="idvendeur" required>
+                  <input type="text" class="form-control" placeholder="ID du produit a supprimer" style="border: 2px black solid; width: 410px" id="form-control" name="idvendeur   " required>
 
                 </div>
                               <input type="submit" id="envoi"  value="Supprimer" style="width: 410px; background-color: black; border: 2px black solid;font-family: 'Roboto-bold', sans-serif;" class="btn btn-info col-md-12"> 
