@@ -18,7 +18,7 @@ $Compte=$_SESSION['COMPTE'];
     
 
 if($_SESSION['COMPTE']!='Acheteur'){
-  echo '<script type="text/javascript">window.alert("Vous devez possèdez un compte acheteur.");</script>';
+  echo '<script type="text/javascript">window.alert("Vous devez possèder un compte acheteur.");</script>';
   echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
   exit;
 }
@@ -37,19 +37,18 @@ if($_SESSION['COMPTE']!='Acheteur'){
 
       $sql = "INSERT INTO `moffre`(`ID`, `ACHETEUR_ID`, `OBJET1`, `OFFREA`) VALUES (NULL,'$idacheteur','$idobjet','$prix')";
       $result = mysqli_query($db_handle,$sql);
-      	echo $sql;
     echo '<script type="text/javascript">window.alert("Offre envoyée !");</script>';
 
       }
     else
     {
-    echo '<script type="text/javascript">window.alert("Veuillez entrez une offre superieur a '.$prixbase.' €");</script>';
+    echo '<script type="text/javascript">window.alert("Veuillez entrer une offre superieure à '.$prixbase.' €");</script>';
 
     }
   mysqli_close($db_handle);
 
 }
 
-//header('Refresh:1;URL=pagedacceuil.php'); 
+header('Refresh:1;URL=pagedacceuil.php'); 
 exit;
 ?>

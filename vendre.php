@@ -14,7 +14,7 @@
   // on teste l'existence de nos variables. On teste également si elles ne sont pas vides
 if ( empty(session_id()) ) session_start();
 if($_SESSION['COMPTE']=='Acheteur'){
-  echo '<script type="text/javascript">window.alert("Vous devez possèdez un compte vendeur.");</script>';
+  echo '<script type="text/javascript">window.alert("Vous devez possèder un compte vendeur.");</script>';
   echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
 }
 

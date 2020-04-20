@@ -49,7 +49,7 @@ if($_SESSION['COMPTE']!='Acheteur'){
       }
     else
     {
-    echo '<script type="text/javascript">window.alert("Veuillez entrez une enchere superieur a '.$offre.' €");</script>';
+    echo '<script type="text/javascript">window.alert("Veuillez entrer une enchere superieure à '.$offre.' €");</script>';
 
     }
   mysqli_close($db_handle);

@@ -235,7 +235,7 @@ if($_SESSION['COMPTE']!='Admin'){
     <h4 style="height: 50px">Quelle vendeur voulez vous supprimer ?</h4>
 <form id="signupform" class="form-horizontal" role="form" action="supprimervendeur.php" method="get">
               <div class="form-group" id="objet">
-                  <input type="text" class="form-control" placeholder="ID du produit a supprimer" style="border: 2px black solid; width: 410px" id="form-control" name="idvendeur   " required>
+                  <input type="text" class="form-control" placeholder="ID du produit a supprimer" style="border: 2px black solid; width: 410px" id="form-control" name="idvendeur" required>
 
                 </div>
                               <input type="submit" id="envoi"  value="Supprimer" style="width: 410px; background-color: black; border: 2px black solid;font-family: 'Roboto-bold', sans-serif;" class="btn btn-info col-md-12"> 
