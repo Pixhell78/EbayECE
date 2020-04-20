@@ -43,11 +43,16 @@
   <!-- Barre de navigation contenant le logo et le menu burger -->
 
 
+
   <!-- DIvision contenant les derniers achats -->
   <div class="container features" id="first">
     <center><h3 style="width: 200px"><center>Mon panier</center></h3></center>
   </div>
 
+  <!-- DIvision contenant les derniers achats -->
+  <div class="container features" id="first">
+    <center><h3 style="width: 200px"><center>Mon panier</center></h3></center>
+  </div>
 
   <div class="container mb-4">
     <div class="row">
@@ -56,6 +61,7 @@
                      <table class="table">
    <thead class="thead-dark">
      <tr>
+
       <th>ID</th>
        <th>Produit</th>
        <th>Prix</th>
@@ -70,6 +76,7 @@
   $db_handle = mysqli_connect(DB_SERVER,DB_USER,DB_PASS);
   $db_found = mysqli_select_db($db_handle, $database);
   $id = $_SESSION['ID'];
+
   $prixtotal =0;
 
   if($db_found){
@@ -80,6 +87,7 @@
  
         $sql = "SELECT * FROM panier WHERE ACHETEUR_ID='$id'" ;
         $result = mysqli_query($db_handle,$sql);
+
             for($i=1;$i<=$num;$i++) {
 
       $data = mysqli_fetch_array($result);
@@ -91,6 +99,7 @@
 
         $nom = $data1['NOM'];
         $prix = $data1['PRIX'];
+
         
         $prixtotal = $prixtotal + $prix;
   
@@ -98,6 +107,7 @@
     echo '    
    <tbody>
      <tr>
+
         <td>'.$idobjet.'</td>
        <td>'.$nom.'</td>
        <td>'.$prix.'€</td>
@@ -108,6 +118,7 @@
 
 
             }
+
         }
 
    /* if($db_found){
@@ -183,10 +194,12 @@ else {
           <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
+
                     <button class="btn btn-lg btn-block btn-dark text-uppercase" onclick="window.location.href="pagedacceuil.php" id="retour">Continuer les achats</button>
                 </div>
 
                 <div class="col-sm-12 col-md-6 text-right">
+
                   <form id="signupform" class="form-horizontal" role="form" action="paiement.php" method="get">
                           <button id="paiement" type="submit" name="idobjet" value="'.$prixtotal.'" class="btn btn-lg btn-block btn-dark text-uppercase"">Payer</button>
               </form>
@@ -201,6 +214,10 @@ else {
             </div>
           </div>
         </div>
+        </div>
+    </div>
+</div>
+<div id="suppresion">
       </div>
 
 
@@ -211,6 +228,7 @@ else {
                   <input type="text" class="form-control" placeholder="ID du produit a supprimer" style="border: 2px black solid; width: 410px" id="form-control" name="suppr" required>
 
                 </div>
+
                               <input type="submit" id="envoi"  value="Supprimer" style=" width: 410px; background-color: black; border: 2px black solid;font-family: 'Roboto-bold', sans-serif;" class="btn btn-info col-md-12"> 
 
                   </form> 
