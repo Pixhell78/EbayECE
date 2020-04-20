@@ -36,7 +36,16 @@ if($_SESSION['COMPTE']!='Acheteur'){
         $sql = "SELECT * FROM objet  WHERE ID='$idobjet'" ;
         $result = mysqli_query($db_handle,$sql);
       $data = mysqli_fetch_array($result);
+      $datefin =$data['FIN'];
       $prixbase = $data['PRIX'];
+      $date=new Datetime('now');
+
+      if($date->format('Y-m-d H:i:s')>$datefin){
+
+    echo '<script type="text/javascript">window.alert("Enchere fermee !");</script>';
+      echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
+      exit;
+      }
 
       if(($prix>$offre || $offre==null) && $prix>$prixbase)
       {

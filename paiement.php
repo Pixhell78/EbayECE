@@ -3,9 +3,10 @@
   define('DB_SERVER','localhost');
   define('DB_USER', 'root');
   define('DB_PASS','');
-
+if ( empty(session_id()) ) session_start(); 
+$prix=$_GET['idobjet']; 
   $database ="ebayece";
-
+  $idacheteur = $_SESSION['ID'];
   $db_handle = mysqli_connect(DB_SERVER,DB_USER,DB_PASS);
   $db_found = mysqli_select_db($db_handle, $database);
 
@@ -13,38 +14,12 @@
 //if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
   // on teste l'existence de nos variables. On teste également si elles ne sont pas vides
 if ( empty(session_id()) ) session_start();
-if($_SESSION['COMPTE']=='Acheteur'){
-  echo '<script type="text/javascript">window.alert("Vous devez possèder un compte vendeur.");</script>';
-  echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
-}
 
-if (isset($_POST["typevente"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
-      if ($_POST["typevente"]  == "1") {// SI ma_radio EST ÉGAL À 1 vente immediate 
-              $type='immediat';} 
 
-      else if ($_POST["typevente"]  == "2") {// SI ma_radio EST ÉGAL À 2 meilleur offre 
-              $type='meilleuroffre';}
+           if ((isset($_POST['ccv']) && !empty($_POST['ccv'])) && (isset($_POST['num']) && !empty($_POST['num']))) {
+                     $ccv         = $_POST['ccv'];
+                     $num = $_POST['num'];
 
-      else if ($_POST["typevente"]  == "3") {// SI ma_radio EST ÉGAL À 3 enchere 
-              $type='enchere';}
-
-if (isset($_POST["typeobjet"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
-      if ($_POST["typeobjet"]  == "1") {// SI ma_radio EST ÉGAL À 1 ferailletresor 
-              $typeobjet='ferailletresor';} 
-
-      else if ($_POST["typeobjet"]  == "2") {// SI ma_radio EST ÉGAL À 2 musee 
-              $typeobjet='musee';}
-
-      else if ($_POST["typeobjet"]  == "3") {// SI ma_radio EST ÉGAL À 3 vip 
-              $typeobjet='vip';}
-            }
-
-           if ((isset($_POST['nom']) && !empty($_POST['nom'])) && (isset($_POST['prix']) && !empty($_POST['prix']))) {
-                     $nom         = $_POST['nom'];
-                     $description = $_POST['description'];
-                     $image       = $_POST['image'];
-                     $prix        = $_POST['prix'];
-                     $datefin = date('Y-m-d H:i:s', strtotime($_POST['datefin']));
                      
 
                      
@@ -52,13 +27,24 @@ if (isset($_POST["typeobjet"])) {  // SI ma_radio A BIEN ÉTÉ POSTÉ
                     
 
   if($db_found){
-    $sql                        ="INSERT INTO `objet` (`ID`, `NOM`, `VENDEUR`, `TYPE`,`TYPEOBJET`, `DESCRIPTION`, `IMAGE`, `PRIX`, `FIN`) VALUES (NULL,'".$nom."', '".$_SESSION['ID']."','$type','$typeobjet','$description','$image','$prix','".$datefin."');";
+    $sql                        ="SELECT * FROM `banque` WHERE NUMERO='$num'";
     $result                     = mysqli_query($db_handle, $sql);
+    $data = mysqli_fetch_array($result);
+    $ccv2=$data['CODE'];
 
-echo $sql;
+    if($ccv2==$ccv)
+    {
+          echo '<script type="text/javascript">window.alert("Paiement effectué avec succès ! ");</script>';
+    $sql                        ="DELETE FROM `panier` WHERE ACHETEUR_ID='$idacheteur'";
+    $result                     = mysqli_query($db_handle, $sql);
+        echo '<meta http-equiv="refresh" content="1; URL=panier.php?idobjet='.$prix'">';
 
-    echo '<script type="text/javascript">window.alert("L objet est en vente !");</script>';
-    sleep(5);
+    }
+    else{
+      echo '<script type="text/javascript">window.alert("La carte que vous avez saisie est incorrecte ! ");</script>';
+        echo '<meta http-equiv="refresh" content="1; URL=paiement.php?idobjet='.$prix'">';
+
+    }
     }
 
 
@@ -68,7 +54,7 @@ echo $sql;
 
           }
       
-}
+
 
 
   mysqli_close($db_handle);
@@ -78,7 +64,7 @@ echo $sql;
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vendre</title>
+  <title>Paiement</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -123,25 +109,7 @@ echo $sql;
       margin-left: -300px;
     }
 
-    #price
-    {
-      margin-left: 470px;
-    }
-
-    #desc
-    {
-      margin-left: 461px;
-    }
-
-    #deroul2
-    {
-      margin-left: -200px;
-    }
-
-    #txtPrix
-    {
-      width: 800px;
-    }
+    
 
     #txtProduit
     {
@@ -225,8 +193,11 @@ echo $sql;
     <h3 style="margin-top: 10px"><center>Négociez votre bonheur</center></h3>
   </div>
 
-  <div id="first" style="margin-top: 180px; border: 2px black solid; width: 300px; margin-right: auto; margin-left: auto">
-    <center><h3 style="margin-top: 10px">Vendez votre produit</h3></center>
+  <div id="first" style="margin-top: 180px; border: 2px black solid; width: 500px;  margin-left: 33%">
+    <center><h3 style="margin-top: 10px">Payez vos produits</h3></center>
+    <?php $aaa=$_GET['idobjet']; 
+
+    echo '<center><h3 style="margin-top: 10px">Reste a payer : '.$aaa.' €</h3></center>';?>
   </div>
 
   <!-- Formulaire d'inscription -->
@@ -235,105 +206,83 @@ echo $sql;
       <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
        <div class="informationgeneral">
         <div class="contenue" >
-          <form id="signupform" class="form-horizontal" role="form" action="vendre.php" method="post">
+              <?php $aaa=$_GET['idobjet']; 
+
+    echo '<form id="signupform" class="form-horizontal" role="form" action="paiement.php?idobjet='.$aaa.'" method="post">';?>
+          
             <div id="alert_enregist" style="display:none" class="alert alert-danger">
               <p>Erreur</p>
               <span></span>
             </div>           
             <!-- RENSEIGNEMENT -->
+                          <div style="margin-left: 40%; " class="col-md-8">
+
             <div id="type">
-              <div class="form-group" id="deroul1">
-                <label for="vente" class="col-md-3 control-label" id="txtProduit"><h4>Type de produits</h4></label>
+                <label for="vente" class="col-md-3 control-label" id="txtProduit"><h4>Type de cartes</h4></label>
                 <div class="col-md-9">
                   
                           
 
                           <div class="form-check form-check-inline" id="type3">
                                   <input type="radio" class="form-check-input" id="ferailletresor" name="typeobjet" value="1" >
-                                 <label for="ferailletresor" style="font-size: 20px;">  Feraille ou trésor</label>
+                                 <label for="ferailletresor" style="font-size: 20px;"> Visa</label>
                           </div>
 
                         <div class="form-check form-check-inline" id="type3">
                                   <input type="radio" class="form-check-input" id="musee" name="typeobjet" value="2" >
-                                 <label for="musee" style="font-size: 20px;">  Musée</label>
+                                 <label for="musee" style="font-size: 20px;">  Mastercard</label>
                           </div>
 
                         <div class="form-check form-check-inline" id="type3">
                              <input type="radio" class="form-check-input" id="vip" name="typeobjet" value="3">
-                            <label for="vip" style="font-size: 20px;">  VIP</label>
+                            <label for="vip" style="font-size: 20px;">  American Express</label>
                         </div>
              
                 </div>
-                
-              </div>
-
-              <div class="form-group" id="deroul2">
-                <label for="vente" class="col-md-3 control-label" id="txtVente"><h4>Type de vente</h4></label>
-                          
-
-                          <div class="form-check form-check-inline" id="type2">
-                                  <input type="radio" class="form-check-input" id="venteimmediate" name="typevente" value="1" >
-                                 <label for="venteimmediate" style="font-size: 20px;">  Vente immediate</label>
                           </div>
 
-                        <div class="form-check form-check-inline" id="type2">
-                                  <input type="radio" class="form-check-input" id="moffre" name="typevente" value="2" >
-                                 <label for="moffre" style="font-size: 20px;">  Meilleur offre</label>
-                          </div>
 
-                        <div class="form-check form-check-inline" id="type2">
-                             <input type="radio" class="form-check-input" id="enchere" name="typevente" value="3">
-                            <label for="enchere" style="font-size: 20px;">  Enchere</label>
-                        </div>
-              </div>
-            </div>
-
-            <div id="ecrire">
-              <div class="form-group" id="name">
-                <label for="nom" class="col-md-3 control-label"><h4>Nom </h4></label>
+             
+            <div >
+              <div class="form-group" >
+                <label for="nom" class="col-md-12 control-label"><h4>Nom du titulaire de la carte</h4></label>
                 <div class="col-md-9">
-                  <input style="border: 2px black solid; width: 300px" type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
+                  <input style="border: 2px black solid; width: 500px" type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required>
                 </div>
               </div>
 
-              <div class="form-group" id="price">
-                <label for="ville" class="col-md-3 control-label" id="txtPrix"><h4 style="text-align: left">Prix de vente</h4></label>
+              <div class="form-group" >
+                <label for="num" class="col-md-12 control-label" id="txtPrix"><h4 style="text-align: left">Numero de la carte</h4></label>
                 <div class="col-md-9">
-                  <input style="width: 300px; border: 2px black solid" type="text" class="form-control" id="prix" name="prix" placeholder="0,00€" required>
+                  <input style="width: 500px; border: 2px black solid" type="text" class="form-control" id="num" name="num" placeholder="1234 1234 1234 1234" required>
                 </div>
               </div>
             </div>
 
 
 
-              <div id="ecrire">
-              <div class="form-group" id="pict">
-                <label for="nom" class="col-md-3 control-label"><h4>Image </h4></label>
+              <div >
+              <div class="form-group" >
+                <label for="nom" class="col-md-12 control-label"><h4>Date de peremption </h4></label>
                 <div class="col-md-9">
-                  <input style="border: 2px black solid; width: 300px" type="text" class="form-control" id="image" name="image" placeholder="image.jpg" required>
+                  <input style="border: 2px black solid; width: 500px" type="text" class="form-control" id="image" name="image" placeholder="12/24" required>
                 </div>
               </div>
 
 
-              <div class="form-group" id="desc">
-                <label for="adresse" class="col-md-3 control-label"><h4>Description</h4></label>
+              <div class="form-group" >
+                <label for="ccv" class="col-md-12 control-label"><h4>CCV</h4></label>
                 <div class="col-md-9">
-                  <textarea style="border: 2px black solid; width: 300px; border-radius: 5px;height: 120px" id="description" name="description" required>
-                  </textarea>
+                  <input style="border: 2px black solid; width: 500px;" id="ccv" placeholder="123" name="ccv" required>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" id="date">
-                      <label for="ville" class="col-md-3 control-label"><h4>Fin de la vente</h4></label>
-                      <div class="col-md-9">
-                            <input style="border: 2px black solid; width: 300px; border-radius: 5px;height: 120px" class="form-control" type="datetime-local" id="datefin" name="datefin" value="2020-04-16T19:30" min="2020-04-16T00:00" max="2021-12-31T00:00">
-                      </div>
-            </div>
 
             <div class="form-group" id="enregistrer">
-              <input id="btn-signup" type="submit" id="envoi" name="button5" value="Envoyer" style="width: 300px; margin-left: 400px; background-color: black; border: 2px black solid;font-family: 'Roboto-bold', sans-serif;" class="btn btn-info col-md-12">     
+              <input id="btn-signup" type="submit" id="envoi" name="button5" value="Payer" style="width: 300px; margin-left: 400px; background-color: black; border: 2px black solid;font-family: 'Roboto-bold', sans-serif;" class="btn btn-info col-md-12">     
             </div>
+        </div>
 
           </form>            
         </div>
