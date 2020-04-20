@@ -224,7 +224,8 @@
   ?>
                     </div> 
                   </div>
-                </div> </div>
+                </div> 
+              </div>
 
 <!-- Footer -->
 <footer class="page-footer">
