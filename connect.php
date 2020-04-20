@@ -67,7 +67,6 @@
 								$sql = "SELECT * FROM vendeur WHERE mail='$mail'";
 								$result = mysqli_query($db_handle,$sql);
 								while ($data = mysqli_fetch_assoc($result)){
-									echo $data;
 										session_start();
 										$_SESSION['ID'] = $data['ID'];
 										$_SESSION['PSEUDO'] = $data['PSEUDO'];
@@ -76,15 +75,14 @@
 
 				}
 				else{
-						if($temp==2){ echo '<script type="text/javascript">window.alert("Email ou Pseudo incorrect !");</script>';
-						echo '<meta http-equiv="refresh" content="1; URL=pageprincipale.html">';
+						if($temp==1){ echo '<script type="text/javascript">window.alert("Email ou Pseudo incorrect !");</script>';
+						echo '<meta http-equiv="refresh" content="1; URL=connexion.php">';
 						}
 				}
 
 		}
 		else
 		{ 
-			echo "test";
  // results not found 
 		}  
  
