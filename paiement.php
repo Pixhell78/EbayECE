@@ -37,12 +37,12 @@ if ( empty(session_id()) ) session_start();
           echo '<script type="text/javascript">window.alert("Paiement effectué avec succès ! ");</script>';
     $sql                        ="DELETE FROM `panier` WHERE ACHETEUR_ID='$idacheteur'";
     $result                     = mysqli_query($db_handle, $sql);
-        echo '<meta http-equiv="refresh" content="1; URL=panier.php?idobjet='.$prix'">';
+        echo '<meta http-equiv="refresh" content="1; URL=panier.php">';
 
     }
     else{
       echo '<script type="text/javascript">window.alert("La carte que vous avez saisie est incorrecte ! ");</script>';
-        echo '<meta http-equiv="refresh" content="1; URL=paiement.php?idobjet='.$prix'">';
+        echo '<meta http-equiv="refresh" content="1; URL=panier.php">';
 
     }
     }

@@ -9,7 +9,6 @@
   <link rel="stylesheet" type="text/css" href="profil.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
   <link rel="stylesheet" href="connexion.php">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <?php session_start(); ?>
@@ -19,14 +18,12 @@
   <!-- Barre de navigation contenant le logo et le menu burger -->
   <div class="menu">
 
-
     <img src="logo.svg" id="logo">
     <input type="checkbox" class="burger">
     <nav>
       <div id = "trait"></div>
       <a class="nav-link" href="pagedacceuil.php">Accueil</a></li>             
       <a class="nav-link" href="categories.php">Catégories</a></li>                      
-
       <a class="nav-link" href="vendre.php">Vendre</a></li>
       <a class="nav-link" href="admin.php">Admin</a></li>
       <a class="nav-link" href="profil.php">Ma Page</a></li>
@@ -42,7 +39,6 @@
 
   <!-- DIvision contenant les derniers achats -->
   <div class="container features" id="first">
-
     <center><h3><center>Ma page</center></h3></center>
   </div>
 

@@ -37,6 +37,7 @@
 									 	session_start();
 										$_SESSION['ID'] = $data['ID'];
 										$_SESSION['PSEUDO'] = $data['PSEUDO'];
+										$_SESSION['COMPTE'] = "Acheteur";
 									echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
 
 								}
@@ -70,6 +71,16 @@
 										session_start();
 										$_SESSION['ID'] = $data['ID'];
 										$_SESSION['PSEUDO'] = $data['PSEUDO'];
+										
+										$sql1 = "SELECT * FROM VENDEUR WHERE mail='$mail'" ;
+     									$result1 = mysqli_query($db_handle,$sql1);
+      									$data1 = mysqli_fetch_array($result1);
+      									$admin = $data1['ADMIN'];
+      									if($admin=="0"){$_SESSION['COMPTE'] = "Vendeur";}
+      									else if($admin=="1"){$_SESSION['COMPTE'] = "Admin"; }
+
+									
+
 							echo '<meta http-equiv="refresh" content="1; URL=pagedacceuil.php">';
 							}
 
