@@ -75,15 +75,14 @@
 
 				}
 				else{
-						if($temp==2){ echo '<script type="text/javascript">window.alert("Email ou Pseudo incorrect !");</script>';
-						echo '<meta http-equiv="refresh" content="1; URL=pageprincipale.html">';
+						if($temp==1){ echo '<script type="text/javascript">window.alert("Email ou Pseudo incorrect !");</script>';
+						echo '<meta http-equiv="refresh" content="1; URL=connexion.php">';
 						}
 				}
 
 		}
 		else
 		{ 
-			echo "test";
  // results not found 
 		}  
  
